@@ -66,21 +66,24 @@ describe("Homework02", () => {
 
   const testData = [
     {
-      
+      describe: 'Validate the failure message is displayed as “Invalid Username entered!” above the form',
       error: 'Invalid Username entered!',
       empty: true
     },
      {
+      describe: 'Validate the failure message is displayed as “Invalid Username entered!” above the form',
       username: 'John',
       password: 'Test1234',
       error: 'Invalid Username entered!',
     },
      {
+      describe: 'Validate the failure message is displayed as “Invalid Password entered!” above the form',
       username: 'TechGlobal',
       password: '1234',
       error:'Invalid Password entered!'
     },
      {
+      describe: 'Validate the failure message is displayed as “Invalid Username entered!” above the form',
       username: 'John',
       password: '1234',
       error: 'Invalid Username entered!'
@@ -90,7 +93,7 @@ describe("Homework02", () => {
 
 testData.forEach((test, index) => {
 
-it(`Test Case 0${index + 7}`, () => {
+it(`Test Case 0${index + 7} -${test.describe}`, () => {
     cy.visit("https://techglobal-training.com/frontend/project-2");
 if (test.empty){
   loginPage.getLoginButton().click()
