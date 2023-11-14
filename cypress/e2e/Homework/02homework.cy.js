@@ -7,14 +7,14 @@ describe("Homework02", () => {
   it("Test Case 01 Validate the login form", () => {
     cy.visit("https://techglobal-training.com/frontend/project-2");
 
-
+     
 
     const testData1 = ['Please enter your username', 'Please enter your password']
     cy.get('#username, #password').parent().each((el, index) => {
       cy.wrap(el).should('have.text', testData1[index]).and('be.visible').and('not.have.attr', 'required')
     })
 
-    cy.get('#login_btn').should('be.visible').and('be.enabled').and('have.text', 'LOGIN')
+    loginPage.getLoginButton().should('be.visible').and('be.enabled').and('have.text', 'LOGIN')
       .next().should('be.visible').and('have.text', 'Forgot Password?').should('have.attr', 'href', '/frontend/project-2')
 
 
@@ -31,7 +31,7 @@ describe("Homework02", () => {
     cy.visit("https://techglobal-training.com/frontend/project-2");
 
     loginPage.logInto('TechGlobal', 'Test1234')
-    cy.get('#logout').click()
+    loginPage.getLogoutButton().click()
   })
 
   it("Test Case 04 Validate the Forgot Password? Link and Reset Password modal", () => {
@@ -44,7 +44,7 @@ describe("Homework02", () => {
   })
 
 
-  it("Test Case 05 Validate the Forgot Password? Link and Reset Password modal", () => {
+  it("Test Case 05 Validate the Reset Password modal close button", () => {
     cy.visit("https://techglobal-training.com/frontend/project-2");
 
     loginPage.forgotPaswword().click()
@@ -66,24 +66,24 @@ describe("Homework02", () => {
 
   const testData = [
     {
-      describe: 'Validate the failure message is displayed as “Invalid Username entered!” above the form',
+      describe: 'Validate the invalid login with the empty credentials',
       error: 'Invalid Username entered!',
       empty: true
     },
      {
-      describe: 'Validate the failure message is displayed as “Invalid Username entered!” above the form',
+      describe: 'Validate the invalid login with the wrong username',
       username: 'John',
       password: 'Test1234',
       error: 'Invalid Username entered!',
     },
      {
-      describe: 'Validate the failure message is displayed as “Invalid Password entered!” above the form',
+      describe: 'Validate the invalid login with the wrong password',
       username: 'TechGlobal',
       password: '1234',
       error:'Invalid Password entered!'
     },
      {
-      describe: 'Validate the failure message is displayed as “Invalid Username entered!” above the form',
+      describe: ' Validate the invalid login with the wrong username and password',
       username: 'John',
       password: '1234',
       error: 'Invalid Username entered!'
